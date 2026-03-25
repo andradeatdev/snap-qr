@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SnapQR
 
-## Getting Started
+High-performance web application for instant, custom QR code generation with multi-format payload support.
 
-First, run the development server:
+## What it does
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Multiple Payload Types**: Generates QR codes for URL, Plain Text, Wi-Fi, vCard, Phone, SMS, Email, Events, Geo-location, PIX (EMVCo), and 2FA (TOTP).
+- **Real-time Preview**: Immediate visual feedback during data entry using client-side rendering.
+- **Dynamic Formatting**: Automatic encoding for complex protocols like WIFI, mailto, and VCARD.
+- **PIX Integration**: Native support for Brazilian instant payment payloads.
+- **Privacy-First**: All generation occurs in the browser; no payload data is sent to a backend.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Framework**: Next.js 16 (App Router), React 19
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS 4, Shadcn/UI (Radix UI)
+- **QR Engine**: qr-code-styling
+- **Payment Logic**: pix-payload
+- **Tooling**: Biome (Linting & Formatting)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## How to run
 
-## Learn More
+1. Install dependencies:
+   ```bash
+   npm install
+   # or
+   bun install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Build for production:
+   ```bash
+   npm run build
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Technical Decisions
 
-## Deploy on Vercel
+- **SSR Compatibility**: `qr-code-styling` uses browser-only APIs. It is loaded via Next.js `dynamic` imports with `ssr: false` to prevent hydration mismatches and server-side crashes.
+- **Client-Side Generation**: QR codes are generated directly in the user's browser, ensuring privacy for sensitive payloads like 2FA secrets and PIX keys.
+- **Performance Tooling**: Biome is used for linting and formatting, providing faster feedback cycles than ESLint/Prettier.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Project Structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `app/`: Next.js App Router pages and providers.
+- `components/`: UI components and specialized `QRCodeDisplay` logic.
+- `lib/`: Type definitions and utility functions.
+- `public/`: Static assets and brand icons.

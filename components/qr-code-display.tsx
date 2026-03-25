@@ -81,9 +81,9 @@ export function QRCodeDisplay({ payload }: QRCodeDisplayProps) {
   return (
     <div className="flex flex-col items-center justify-center w-full">
       <div className="relative group">
-        <div className="absolute -inset-4 bg-gradient-to-tr from-[#e2583e] to-orange-400 opacity-20 blur-2xl group-hover:opacity-30 transition-opacity" />
+        <div className="absolute -inset-4 bg-linear-to-tr from-[#e2583e] to-orange-400 opacity-20 blur-2xl group-hover:opacity-30 transition-opacity" />
         <div className="bg-white dark:bg-zinc-950 rounded-[40px] p-8 relative shadow-2xl border border-white/50 dark:border-zinc-800">
-          <div ref={qrRef} className="w-[300px] h-[300px] flex items-center justify-center overflow-hidden" />
+          <div ref={qrRef} className="w-75 h-75 flex items-center justify-center overflow-hidden" />
         </div>
       </div>
 
